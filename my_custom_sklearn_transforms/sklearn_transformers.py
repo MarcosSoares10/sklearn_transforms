@@ -18,11 +18,11 @@ class DropColumns(BaseEstimator, TransformerMixin):
  
 # Retorna um novo dataframe com valor nulo igual a média dos demais values nas colunas escolhidas
 class RecalculateNullNumericValues(BaseEstimator, TransformerMixin):
-    def __init__(self, initialnumericcolumn,finalnumericcolumn):
+    def __init__(self, initialnumericcolumn, finalnumericcolumn):
         self.initialnumericcolumn = initialnumericcolumn
         self.finalnumericcolumn = finalnumericcolumn
     
-    def fit(self,X,y=None):
+    def fit(self, X, y=None):
         return self
 
     def transform(self, X):
@@ -62,7 +62,7 @@ class BalanceClasses(BaseEstimator, TransformerMixin):
     
 # Transformação Clamp para garantir valores de notas entre 0-10
 class ClampClasses(BaseEstimator, TransformerMixin):
-    def __init__(self, initialnumericcolumn,finalnumericcolumn):
+    def __init__(self, initialnumericcolumn, finalnumericcolumn):
         self.initialnumericcolumn = initialnumericcolumn
         self.finalnumericcolumn = finalnumericcolumn
         
