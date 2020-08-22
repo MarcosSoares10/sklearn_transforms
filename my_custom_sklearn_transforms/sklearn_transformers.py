@@ -18,18 +18,18 @@ class DropColumns(BaseEstimator, TransformerMixin):
  
 # Retorna um novo dataframe com valor nulo igual a média dos demais values nas colunas escolhidas
 class RecalculateNullNumericValues(BaseEstimator, TransformerMixin):
-    def __init__(self, InitialNumericColumn,FinalNumericColumn):
-        self.InitialNumericColumn = InitialNumericColumn
-        self.FinalNumericColumn = FinalNumericColumn
+    def __init__(self, initialnumericcolumn,finalnumericcolumn):
+        self.initialnumericcolumn = initialnumericcolumn
+        self.finalnumericcolumn = finalnumericcolumn
     
     def fit(self,X,y=None):
         return self
 
     def transform(self, X):
         data = X.copy()
-        values = data.loc[:,self.InitialNumericColumn:self.FinalNumericColumn]
+        values = data.loc[:,self.initialnumericcolumn:self.finalnumericcolumn]
         values = values.T.fillna(round(values.mean(axis=1),1)).T
-        data.loc[:,self.InitialNumericColumn:self.FinalNumericColumn] = values
+        data.loc[:,self.initialnumericcolumn:self.finalnumericcolumn] = values
         return data
 
 # Retorna um novo dataframe com dados balanceados, para isso é verificado se a melhor opção é o Oversampling ou Downsampling
@@ -62,16 +62,16 @@ class BalanceClasses(BaseEstimator, TransformerMixin):
     
 # Transformação Clamp para garantir valores de notas entre 0-10
 class ClampClasses(BaseEstimator, TransformerMixin):
-    def __init__(self, InitialNumericColumn,FinalNumericColumn):
-        self.InitialNumericColumn = InitialNumericColumn
-        self.FinalNumericColumn = FinalNumericColumn
+    def __init__(self, initialnumericcolumn,finalnumericcolumn):
+        self.initialnumericcolumn = initialnumericcolumn
+        self.finalnumericcolumn = finalnumericcolumn
         
     def fit(self, X, y=None):
           return self
 
     def transform(self, X):
           data = X.copy()
-          values = data.loc[:,self.InitialNumericColumn:self.FinalNumericColumn]
+          values = data.loc[:,self.initialnumericcolumn:self.finalnumericcolumn]
           values = values.clip(0.0,10.0)
-          data.loc[:,self.InitialNumericColumn:self.FinalNumericColumn] = values
+          data.loc[:,self.initialnumericcolumn:self.finalnumericcolumn] = values
           return data
